@@ -1,5 +1,10 @@
-// const Todolist = './src/controllers/todolist';
-const Todolist = require('./src/controllers/todolist')
+// import router from './routes/routes.js';
+// const router = require('./routes/routes.js')
+// const Todolist = require('./controllers/todolist')
+
+
+
+
 
 const resolveSoa = require('dns')
 const express = require("express")
@@ -11,34 +16,41 @@ const app = express()
 
 app.use(express.json());
 
-todo = []
+
+
+app.get('/', (req, res) => res.status(200).send({ message: 'Welcome to my Todolist app' }));
 
 
 
-app.post('/api/todolists',(req,res) => {
 
-     const newTodo= {
-        id: todo.length + 1,
-        successs:true,
-        Todo: req.body.Todo,
-        description:req.body.description,
-        createdDate:moment.now(),
-        modifiedDate:moment.now()
-    }
-        todo.push(newTodo);
-    if(!req.body.newTodo ){
-        return res.json({'status':'error','message':'not created'});
-    }else {
-        return res.status(201).json({
-            data:newTodo,
-            message:'Todo successfully created',
-            'status':'201'});
-    }
-});
+// todo = []
 
-// app.get('/api/todolists', (req, res) => {
-//     res.json(todo);
+
+
+// app.post('/api/todolists',(req,res) => {
+
+//      const newTodo= {
+//         id: todo.length + 1,
+//         successs:true,
+//         Todo: req.body.Todo,
+//         description:req.body.description,
+//         createdDate:moment.now(),
+//         modifiedDate:moment.now()
+//     }
+//         todo.push(newTodo);
+//     if(!req.body.newTodo ){
+//         return res.json({'status':'error','message':'not created'});
+//     }else {
+//         return res.status(201).json({
+//             data:newTodo,
+//             message:'Todo successfully created',
+//             'status':'201'});
+//     }
 // });
+
+// // app.get('/api/todolists', (req, res) => {
+// //     res.json(todo);
+// // });
 
 
 
@@ -77,3 +89,7 @@ app.post('/api/todolists',(req,res) => {
 
 const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
+
+// export default app;
+module.exports = app
+

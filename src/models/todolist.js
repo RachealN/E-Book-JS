@@ -36,7 +36,9 @@ const todolistArray= [
         
     }
     
-    export {Todolist,todolistArray};
+
+module.exports = {Todolist,todolistArray};
+
     
     
     
