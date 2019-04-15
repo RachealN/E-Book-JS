@@ -21,32 +21,32 @@ class RulesController {
 	   };
 	}
 	static createRules(req,res){
-		const add = new Rules ({
-			rulesId:rulesId.length + 1,
-			rule_description:req.body.rule_description,
-			rule_value:req.body.rule_value
-				});
-				if(!req.body.rule_description) return {
-					"status":400,
-					"success":"false",
-					"message":" rule_description is required",
-				};
+		const add=new Rules ({
+		rulesId:rulesArray.length+1,
+		rule_description:req.body.rule_description,
+		rule_value:req.body.rule_value
+	})
+	if(!req.body.rule_description) return {
+		"status":400,
+		"success":"false",
+		"message":" rule_description is required"
+	};
 				
-				if(!req.body.rule_value) return {
-					"status":400,
-					"success":"false",
-					"message":"rule_value is required",
-				};
+	if(!req.body.rule_value) return {
+		"status":400,
+		"success":"false",
+		"message":"rule_value is required",
+	};
 		
-		rulesArray.push(add);
-			return {
-				"status":200,
-				"success":"true",
-				"message":" successfully added",
-				add
-				
-			};
-		}
+	rulesArray.push(add);
+	 return {
+		"status":200,
+		"success":"true",
+		"message":" successfully added",
+		add
+					
+	};
+	}
 	static deleteRule(req,res){
 		const get_id = rulesArray.find(check_id => check_id.rulesId === parseInt(req.params.rulesId));
 	if (!get_id) return{

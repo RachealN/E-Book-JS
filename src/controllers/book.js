@@ -21,6 +21,12 @@ class BookController {
 	   };
 	}
 	static createBook(req,res){
+
+		// const{error} = validateBook(req.body);
+		// if (error)  {
+		// 	res.status(400).send(error.details[0].message);
+		// 	return;
+		// }
 		const add = new Books ({
 			bookId:todolistArray.length + 1,
 			title:req.body.title,
@@ -33,6 +39,13 @@ class BookController {
 			status:req.body.status
 
 				});
+//Validation function
+		// function validateBook(bookArray){
+		// 	const schema = {
+		// 		title:Joi.string().min(3).required()
+		// 	};
+		// 	return Joi.validate(bookArray,schema);
+		// }
 				if(!req.body.title) return {
 					"status":400,
 					"success":"false",
