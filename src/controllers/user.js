@@ -31,45 +31,7 @@ class UserController {
 			email:req.body.email
 
 				});
-				if(!req.body.firstName) return {
-					"status":400,
-					"success":"false",
-					"message":" firstName is required",
-				};
 				
-				if(!req.body.lastName) return {
-					"status":400,
-					"success":"false",
-					"message":"lastName is required",
-				};
-				
-				if(!req.body.userName) return {
-					"status":400,
-					"success":"false",
-					"message":" userName is required",
-				};
-
-				if(!req.body.address) return {
-					"status":400,
-					"success":"false",
-					"message":" address is required",
-				};
-
-				if(!req.body.phoneNumber) return {
-					"status":400,
-					"success":"false",
-					"message":"phoneNumber is required",
-				};
-
-				if(!req.body.email) return {
-					"status":400,
-					"success":"false",
-					"message":" email is required",
-				};
-
-				
-		
-		
 		userArray.push(add);
 			return {
 				"status":200,
@@ -82,8 +44,8 @@ class UserController {
 	static deleteUser(req,res){
 		const get_id = userArray.find(check_id => check_id.userId === parseInt(req.params.userId));
 	if (!get_id) return{
-			"status":200,
-			"success":"true",
+			"status":404,
+			"success":"false",
 			"message":" userId not found"
 		};
 

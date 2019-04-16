@@ -1,5 +1,6 @@
-
+const Joi = require('joi');
 const {Books,bookArray} = require('../models/book')
+const {validateBook} = require('../middleware/validators')
 
 class BookController {
 	static getBooks(req,res){
@@ -7,28 +8,30 @@ class BookController {
 			"status":200,
 			"success":"true",
 			"message":"retrieved successfully",
-			"todos":bookArray
+			"books":bookArray 
 		};
 	}
 	static getBook(req,res){
 		const get_id=bookArray.find(check_id => check_id.bookId===parseInt(req.params.bookId));
 	   if(!get_id)return{
-			"status":200,
-			"success":"true",
-			"message":" bookId retrieved successfully",
+			"status":404,
+			"success":"false",
+			"message":" bookId not found",
 			get_id,
 
 	   };
 	}
 	static createBook(req,res){
 
-		// const{error} = validateBook(req.body);
-		// if (error)  {
-		// 	res.status(400).send(error.details[0].message);
-		// 	return;
-		// }
+		const{error} = validateBook(req.body);
+		if (error)  {
+			return {
+				"status":400,
+				"message":error.details[0].message  
+			};
+		}
 		const add = new Books ({
-			bookId:todolistArray.length + 1,
+			bookId:bookArray.length + 1,
 			title:req.body.title,
 			isbn:req.body.isbn,
 			description:req.body.description,
@@ -39,57 +42,21 @@ class BookController {
 			status:req.body.status
 
 				});
-//Validation function
-		// function validateBook(bookArray){
-		// 	const schema = {
-		// 		title:Joi.string().min(3).required()
-		// 	};
-		// 	return Joi.validate(bookArray,schema);
-		// }
-				if(!req.body.title) return {
-					"status":400,
-					"success":"false",
-					"message":" title is required",
-				};
+	// Validation function
+		function validateBook(bookArray){
+			const schema = {
+				title:Joi.string().min(3).required(),
+				isbn:Joi.number().integer().required(),
+				description:Joi.string().min(15).max(100).required(),
+				edition:Joi.required(),
+				author:Joi.string().min(3).required(),
+				price:Joi.number().integer().required(),
+				status:Joi.required()
+			};
+			return Joi.validate(bookArray,schema);
+		}
 				
-				if(!req.body.isbn) return {
-					"status":400,
-					"success":"false",
-					"message":" isbn is required",
-				};
-				
-				if(!req.body.edition) return {
-					"status":400,
-					"success":"false",
-					"message":" edition is required",
-				};
 
-				if(!req.body.author) return {
-					"status":400,
-					"success":"false",
-					"message":" author is required",
-				};
-
-				if(!req.body.price) return {
-					"status":400,
-					"success":"false",
-					"message":"price is required",
-				};
-
-				if(!req.body.status) return {
-					"status":400,
-					"success":"false",
-					"message":" status is required",
-				};
-
-				if(!req.body.description) return {
-					"status":400,
-					"success":"false",
-					"message":" description is required",
-				};
-				
-		
-		
 		bookArray.push(add);
 			return {
 				"status":200,
@@ -121,10 +88,10 @@ class BookController {
 	}
 	
 	static updateBook(req,res){
-		const newTBook = bookArray.find(g => g.bookId === parseInt(req.params.bookId));
+		const newBook = bookArray.find(g => g.bookId === parseInt(req.params.bookId));
 		if (!bookArray) return{
-			"status":200,
-			"success":"true",
+			"status":404,
+			"success":"false",
 			"message":" The book with the given ID was not found ",
 			get_id
 

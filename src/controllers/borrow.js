@@ -13,9 +13,9 @@ class BorrowingController {
 	static getBorrower(req,res){
 		const get_id= borrowArray.find(check_id => check_id.borrowingId===parseInt(req.params.borrowingId));
 	   if(!get_id)return{
-			"status":200,
-			"success":"true",
-			"message":" BorrowingId retrieved successfully",
+			"status":404,
+			"success":"false",
+			"message":" BorrowingId not found",
 			get_id,
 
 	   };

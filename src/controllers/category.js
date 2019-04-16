@@ -12,9 +12,9 @@ class CategoryController {
 	static getCategory(req,res){
 		const get_id= categoryArray.find(check_id => check_id.categoryId===parseInt(req.params.categoryId));
 	   if(!get_id)return{
-			"status":200,
-			"success":"true",
-			"message":" categoryId retrieved successfully",
+			"status":404,
+			"success":"false",
+			"message":" categoryId not found",
 			get_id,
 
 	   };

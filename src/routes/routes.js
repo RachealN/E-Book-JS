@@ -17,50 +17,57 @@ router.get('/api/rules',(req,res)=>{
 }); 
 
 router.get('/api/rules/:id',(req,res)=>{
-    res.json(RulesController.getRule());
+    res.json(RulesController.getRule(req));
 });
 
+
+// router.get('/api/rules/:id',(req,res)=>{
+//     console.log('rulesId' + req.query.id);
+//         res.json(RulesController.getRule(req,res));
+// });
+
+
 router.post('/api/rules',(req,res)=>{
-    res.json(RulesController.createRules());
+    res.json(RulesController.createRules(req));
 });
 
 router.put('/api/rules/:id',(req,res)=>{
-    res.json(RulesController.updateRules());
+    res.json(RulesController.updateRules(req));
 });
 
 router.delete('/api/rules/:id',(req,res)=>{
-    res.json(RulesController.deleteRule());
+    res.json(RulesController.deleteRule(req));
 });
 
 router.patch('/api/rules/:id',(req,res)=>{
-    res.json(RulesController.patchRule());
+    res.json(RulesController.patchRule(req));
 });
 
 
 
 //Routes for categories
 router.get('/api/categories',(req,res)=>{
-    res.json(CategoryController.getCategories());
+    res.json(CategoryController.getCategories(req));
 }); 
 
 router.get('/api/categories/:id',(req,res)=>{
-    res.json(CategoryController.getCategory());
+    res.json(CategoryController.getCategory(req));
 });
 
 router.post('/api/categories',(req,res)=>{
-    res.json(CategoryController.createCategory());
+    res.json(CategoryController.createCategory(req));
 });
 
 router.put('/api/categories/:id',(req,res)=>{
-    res.json(CategoryController.updateCategory());
+    res.json(CategoryController.updateCategory(req));
 });
 
 router.delete('/api/categories/:id',(req,res)=>{
-    res.json(CategoryController.deleteCategory());
+    res.json(CategoryController.deleteCategory(req));
 });
 
 router.patch('/api/categories/:id',(req,res)=>{
-    res.json(CategoryController.patchCategory());
+    res.json(CategoryController.patchCategory(req));
 });
 
 
@@ -68,27 +75,27 @@ router.patch('/api/categories/:id',(req,res)=>{
 
 //Routes for borrowers
 router.get('/api/borrowers',(req,res)=>{
-    res.json(BorrowingController.getBorrowers());
+    res.json(BorrowingController.getBorrowers(req));
 }); 
 
 router.get('/api/borrowers/:id',(req,res)=>{
-    res.json(BorrowingController.getBorrower());
+    res.json(BorrowingController.getBorrower(req));
 });
 
 router.post('/api/borrowers',(req,res)=>{
-    res.json(BorrowingController.createBorrower());
+    res.json(BorrowingController.createBorrower(req));
 });
 
 router.put('/api/borrowers/:id',(req,res)=>{
-    res.json(BorrowingController.updateBorrow());
+    res.json(BorrowingController.updateBorrow(req));
 });
 
 router.delete('/api/borrowers/:id',(req,res)=>{
-    res.json(BorrowingController.deleteBorrow());
+    res.json(BorrowingController.deleteBorrow(req));
 });
 
 router.patch('/api/borrowers/:id',(req,res)=>{
-    res.json(BorrowingController.patchBorrower());
+    res.json(BorrowingController.patchBorrower(req));
 });
 
 
@@ -96,27 +103,27 @@ router.patch('/api/borrowers/:id',(req,res)=>{
 
 //Routes for users
 router.get('/api/users',(req,res)=>{
-    res.json(UserController.getUsers());
+    res.json(UserController.getUsers(req));
 });
 
 router.get('/api/users/:id',(req,res)=>{
-    res.json(UserController.getUser());
+    res.json(UserController.getUser(req));
 });
 
 router.post('/api/users',(req,res)=>{
-    res.json(UserController.createUser());
+    res.json(UserController.createUser(req));
 });
 
 router.put('/api/users/:id',(req,res)=>{
-    res.json(UserController.updateUser());
+    res.json(UserController.updateUser(req));
 });
 
 router.delete('/api/users/:id',(req,res)=>{
-    res.json(UserController.deleteUser());
+    res.json(UserController.deleteUser(req));
 });
 
 router.patch('/api/users/:id',(req,res)=>{
-    res.json(UserController.patchUser());
+    res.json(UserController.patchUser(req));
 });
 
 
@@ -126,23 +133,23 @@ router.get('/api/authors',(req,res)=>{
 });
 
 router.get('/api/authors/:id',(req,res)=>{
-    res.json(AuthorController.getAuthor())
+    res.json(AuthorController.getAuthor(req))
 });
 
 router.post('/api/authors',(req,res)=>{
-    res.json(AuthorController.createAuthor())
+    res.json(AuthorController.createAuthor(req))
 });
 
 router.put('/api/authors/:id',(req,res)=>{
-    res.json(AuthorController.updateAuthor())
+    res.json(AuthorController.updateAuthor(req))
 });
 
 router.delete('/api/authors/:id',(req,res)=>{
-    res.json(AuthorController.deleteAuthor())
+    res.json(AuthorController.deleteAuthor(req))
 });
 
 router.patch('/api/authors/:id',(req,res)=>{
-    res.json(AuthorController.patchAuthor())
+    res.json(AuthorController.patchAuthor(req))
 });
 
 
@@ -153,28 +160,30 @@ router.get('/api/books',(req,res)=>{
 });
 
 router.get('/api/books/:id',(req,res)=>{
-    res.json(BookController.getBook())
+    res.json(BookController.getBook(req))
 });
 
-// router.get('/api/books/:id',(req,res) =>{
-//     console.log('ID'+ req.query.id);
-//     res.json(BookController.getBook())
-// })
+// router.get('/api/rules/:id',(req,res)=>{
+//     console.log('rulesId' + req.query.rulesId);
+//     res.json(RulesController.getRule(req,res));
+//     });
+
+
 
 router.post('/api/books',(req,res)=>{
-    res.json(BookController.createBook())
+    res.json(BookController.createBook(req))
 });
 
 router.put('/api/books/:id',(req,res) =>{
-    res.json(BookController.updateBook())
+    res.json(BookController.updateBook(req))
 });
 
 router.delete('/api/books/:id',(req,res) =>{
-    res.json(BookController.deleteBook())
+    res.json(BookController.deleteBook(req))
 });
 
 router.patch('/api/books/:id',(req,res) =>{
-    res.json(BookController.patchBook())
+    res.json(BookController.patchBook(req))
 });
 
 

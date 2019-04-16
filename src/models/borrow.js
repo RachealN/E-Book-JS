@@ -1,31 +1,4 @@
-const borrowArray= [
-    {
-        borrowingId:1,
-        date_issued:"9/6/2018",
-        date_due_for_return:"8/12/2018",
-        date_returned:"2/1/2019",
-        amount_of_fine:"$100"
-        
-        
-            
-    },
-    
-    {
-        borrowingId:3,
-        date_issued:"9/6/2018",
-        date_due_for_return:"8/12/2018",
-        date_returned:"2/1/2019",
-        amount_of_fine:"$200"
-    },
-    
-    {
-        borrowingId:3,
-        date_issued:"9/6/2018",
-        date_due_for_return:"8/12/2018",
-        date_returned:"2/1/2019",
-        amount_of_fine:"$150"
-    }
-    ]
+const borrowArray = []
     
     class Borrowers{
         constructor({

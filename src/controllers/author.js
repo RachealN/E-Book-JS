@@ -12,9 +12,9 @@ class AuthorController {
 	static getAuthor(req,res){
 		const get_id=authorArray.find(check_id => check_id.authorId===parseInt(req.params.authorId));
 	   if(!get_id)return{
-			"status":200,
-			"success":"true",
-			"message":" bookId retrieved successfully",
+			"status":404,
+			"success":"false",
+			"message":" authorId not found",
 			get_id,
 
 	   };
@@ -28,34 +28,7 @@ class AuthorController {
 			phoneNumber:req.body.phoneNumber
 
 				});
-				if(!req.body.firstName) return {
-					"status":400,
-					"success":"false",
-					"message":" firstName is required",
-				};
 				
-				if(!req.body.lastName) return {
-					"status":400,
-					"success":"false",
-					"message":" lastName is required",
-				};
-				
-				if(!req.body.address) return {
-					"status":400,
-					"success":"false",
-					"message":" address is required",
-				};
-
-				if(!req.body.phoneNumber) return {
-					"status":400,
-					"success":"false",
-					"message":" phoneNumber is required",
-				};
-
-				
-				
-		
-		
 		authorArray.push(add);
 			return {
 				"status":200,

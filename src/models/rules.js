@@ -1,22 +1,4 @@
-const rulesArray= [
-    {
-        rulesId:1,
-        rule_description:"dhgsdfhasfhdfgw",
-        rule_value:"dfhuehfefsd"        
-    },
-    
-    {
-        rulesId:2,
-        rule_description:"dhgsdfhasfhdfgw",
-        rule_value:"dfhuehfefsd"  
-    },
-    
-    {
-        rulesId:3,
-        rule_description:"dhgsdfhasfhdfgw",
-        rule_value:"dfhuehfefsd"  
-    }
-    ]
+const rulesArray= []
     
     class Rules{
         constructor({

@@ -1,20 +1,4 @@
-const categoryArray= [
-    {
-        categoryId:1,
-        categoryName:"Science and Technology"   
-            
-    },
-    
-    {
-        categoryId:2,
-        categoryName:"Programming"  
-    },
-    
-    {
-        categoryId:3,
-        categoryName:"Art"  
-    }
-    ]
+const categoryArray= []
     
     class Categories{
         constructor({

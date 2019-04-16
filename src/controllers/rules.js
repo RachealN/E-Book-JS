@@ -11,15 +11,22 @@ class RulesController {
 		};
 	}
 	static getRule(req,res){
-		const get_id= rulesArray.find(check_id => check_id.rulesId===parseInt(req.params.rulesId));
-	   if(!get_id)return{
-			"status":200,
-			"success":"true",
-			"message":" Rules retrieved successfully",
-			get_id,
+		const get_id = rulesArray.find(check_id => check_id.rulesId === parseInt(req.params.rulesId));
+		
+		return{
+			"id":get_id,
+			"message":"id retrieved succesfully"
+		}
+		// if (!get_id) {
+		// 	return{
+		// 		"message":" id not found"
 
-	   };
-	}
+		// 	}
+		// }
+		
+	};
+	
+	
 	static createRules(req,res){
 		const add=new Rules ({
 		rulesId:rulesArray.length+1,
