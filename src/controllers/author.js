@@ -10,15 +10,23 @@ class AuthorController {
 		};
 	}
 	static getAuthor(req,res){
-		const get_id=authorArray.find(check_id => check_id.authorId===parseInt(req.params.authorId));
-	   if(!get_id)return{
-			"status":404,
-			"success":"false",
-			"message":" authorId not found",
+			const get_id = authorArray.find(check_id => check_id.authorId===parseInt(req.params.id));
+			
+			if(!get_id){
+				return{
+				"status":404,
+				"success":"false",
+				"message":" authorId not found",get_id
+	
+		   };
+		}
+		   return {
 			get_id,
-
-	   };
-	}
+			"message":"Author with that id is found",
+			"status":"200",
+			"success":"true"
+		}
+		}
 	static createAuthor(req,res){
 		const add = new Authors ({
 			authorId:authorArray.length + 1,
@@ -39,12 +47,14 @@ class AuthorController {
 			};
 		}
 	static deleteAuthor(req,res){
-		const get_id = authorArray.find(check_id => check_id.authorId === parseInt(req.params.authorId));
-	if (!get_id) return{
+		const get_id = authorArray.find(check_id => check_id.authorId === parseInt(req.params.id));
+	if (!get_id) {
+		return{
 			"status":200,
 			"success":"true",
 			"message":" authorId not found"
 		};
+	}
 
 		const index=bookArray.indexOf(get_id);
 		authorArray.splice(index,1);
@@ -60,12 +70,12 @@ class AuthorController {
 	}
 	
 	static updateAuthor(req,res){
-		const newAuthor = authorArray.find(g => g.authorId === parseInt(req.params.authorId));
+		const newAuthor = authorArray.find(g => g.authorId === parseInt(req.params.id));
 		if (!authorArray) return{
 			"status":200,
 			"success":"true",
 			"message":" The author with the given ID was not found ",
-			get_id
+			newAuthor
 
 		};
 
@@ -74,7 +84,7 @@ class AuthorController {
 			"status":200,
 			"success":"true",
 			"message":" successfully updated",
-			get_id
+			newAuthor
 
 		};
 

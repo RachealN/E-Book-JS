@@ -11,20 +11,23 @@ class RulesController {
 		};
 	}
 	static getRule(req,res){
-		const get_id = rulesArray.find(check_id => check_id.rulesId === parseInt(req.params.rulesId));
-		
-		return{
-			"id":get_id,
-			"message":"id retrieved succesfully"
+			const get_id = rulesArray.find(check_id => check_id.rulesId===parseInt(req.params.id));
+			
+			if(!get_id){
+				return{
+				"status":404,
+				"success":"false",
+				"message":" rules with that id not found",get_id
+	
+		   };
 		}
-		// if (!get_id) {
-		// 	return{
-		// 		"message":" id not found"
-
-		// 	}
-		// }
-		
-	};
+		   return {
+			get_id,
+			"message":"rules with that is is succesfully retrieved ",
+			"status":"200",
+			"success":"true"
+		}
+		}
 	
 	
 	static createRules(req,res){
@@ -55,12 +58,14 @@ class RulesController {
 	};
 	}
 	static deleteRule(req,res){
-		const get_id = rulesArray.find(check_id => check_id.rulesId === parseInt(req.params.rulesId));
-	if (!get_id) return{
+		const get_id = rulesArray.find(check_id => check_id.rulesId === parseInt(req.params.id));
+	if (!get_id) {
+		return{
 			"status":200,
 			"success":"true",
 			"message":" rulesId not found"
 		};
+	}
 
 		const index=borrowArray.indexOf(get_id);
 		rulesArray.splice(index,1);

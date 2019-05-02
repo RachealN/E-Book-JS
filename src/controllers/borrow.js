@@ -11,15 +11,23 @@ class BorrowingController {
 		};
 	}
 	static getBorrower(req,res){
-		const get_id= borrowArray.find(check_id => check_id.borrowingId===parseInt(req.params.borrowingId));
-	   if(!get_id)return{
-			"status":404,
-			"success":"false",
-			"message":" BorrowingId not found",
+			const get_id = borrowArray.find(check_id => check_id.borrowId===parseInt(req.params.id));
+			
+			if(!get_id){
+				return{
+				"status":404,
+				"success":"false",
+				"message":" BorrowingId not found",get_id
+	
+		   };
+		}
+		   return {
 			get_id,
-
-	   };
-	}
+			"message":"Borrower with that id is found",
+			"status":"200",
+			"success":"true"
+		}
+		}
 	static createBorrower(req,res){
 		const add = new Borrowers ({
 			borrowingId:borrowingId.length + 1,
@@ -64,12 +72,14 @@ class BorrowingController {
 			};
 		}
 	static deleteBorrow(req,res){
-		const get_id = borrowArray.find(check_id => check_id.borrowingId === parseInt(req.params.borrowingId));
-	if (!get_id) return{
+		const get_id = borrowArray.find(check_id => check_id.borrowingId === parseInt(req.params.id));
+	if (!get_id) {
+		return{
 			"status":200,
 			"success":"true",
 			"message":" borrowingId not found"
 		};
+	}
 
 		const index=borrowArray.indexOf(get_id);
 		borrowArray.splice(index,1);

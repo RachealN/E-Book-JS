@@ -11,15 +11,23 @@ class UserController {
 		};
 	}
 	static getUser(req,res){
-		const get_id= userArray.find(check_id => check_id.userId===parseInt(req.params.userId));
-	   if(!get_id)return{
-			"status":200,
-			"success":"true",
-			"message":" userId retrieved successfully",
+		const get_id = userArray.find(check_id => check_id.userId===parseInt(req.params.id));
+			
+			if(!get_id){
+				return{
+				"status":404,
+				"success":"false",
+				"message":" userId not found",get_id
+	
+		   };
+		}
+		   return {
 			get_id,
-
-	   };
-	}
+			"message":"user with that id is succesfully retrieved ",
+			"status":"200",
+			"success":"true"
+		}
+		}
 	static createUser(req,res){
 		const add = new Users ({
 			userId:userArray.length + 1,
@@ -42,12 +50,14 @@ class UserController {
 			};
 		}
 	static deleteUser(req,res){
-		const get_id = userArray.find(check_id => check_id.userId === parseInt(req.params.userId));
-	if (!get_id) return{
+		const get_id = userArray.find(check_id => check_id.userId === parseInt(req.params.id));
+	if (!get_id) {
+		return{
 			"status":404,
 			"success":"false",
 			"message":" userId not found"
 		};
+	}
 
 		const index=userArray.indexOf(get_id);
 		userArray.splice(index,1);

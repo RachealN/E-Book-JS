@@ -10,15 +10,23 @@ class CategoryController {
 		};
 	}
 	static getCategory(req,res){
-		const get_id= categoryArray.find(check_id => check_id.categoryId===parseInt(req.params.categoryId));
-	   if(!get_id)return{
-			"status":404,
-			"success":"false",
-			"message":" categoryId not found",
+			const get_id = categoryArray.find(check_id => check_id.categoryId===parseInt(req.params.id));
+			
+			if(!get_id){
+				return{
+				"status":404,
+				"success":"false",
+				"message":" category not found",get_id
+	
+		   };
+		}
+		   return {
 			get_id,
-
-	   };
-	}
+			"message":"category with that id is succesfully retrieved",
+			"status":"200",
+			"success":"true"
+		}
+		}
 	static createCategory(req,res){
 		const add = new categories ({
 			categoryId:categoryArray.length + 1,
@@ -42,12 +50,14 @@ class CategoryController {
 			};
 		}
 	static deleteCategory(req,res){
-		const get_id = categoryArray.find(check_id => check_id.categoryId === parseInt(req.params.categoryId));
-	if (!get_id) return{
+		const get_id = categoryArray.find(check_id => check_id.categoryId === parseInt(req.params.id));
+	if (!get_id){
+		 return{
 			"status":200,
 			"success":"true",
 			"message":" categoryId not found"
 		};
+	}
 
 		const index=categoryArray.indexOf(get_id);
 		categoryArray.splice(index,1);

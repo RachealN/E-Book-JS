@@ -9,20 +9,20 @@
 
 
 
-//     class validateBook{
-//         static postBook(req,res,next){
-//             const schema = {
-// 				title:Joi.string().min(3).required(),
-// 				isbn:Joi.number().integer().required(),
-// 				description:Joi.string().min(15).max(100).required(),
-// 				edition:Joi.required(),
-// 				author:Joi.string().min(3).required(),
-// 				price:Joi.number().integer().required(),
-// 				status:Joi.required()
-// 			};
-// 			return Joi.validate(bookArray,schema);
-// 		}
-//         };
+    // class validateBook{
+    //     static postBook(req,res,next){
+    //         const schema = {
+	// 			title:Joi.string().min(3).required(),
+	// 			isbn:Joi.number().integer().required(),
+	// 			description:Joi.string().min(15).max(100).required(),
+	// 			edition:Joi.required(),
+	// 			author:Joi.string().min(3).required(),
+	// 			price:Joi.number().integer().required(),
+	// 			status:Joi.required()
+	// 		};
+	// 		return Joi.validate(bookArray,schema);
+	// 	}
+    //     };
 //         // const{error} = Joi.validate({
 //         //     title:req.body.title,
 //         //     isbn:req.body.isbn,

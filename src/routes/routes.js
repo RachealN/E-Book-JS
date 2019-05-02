@@ -163,12 +163,6 @@ router.get('/api/books/:id',(req,res)=>{
     res.json(BookController.getBook(req))
 });
 
-// router.get('/api/rules/:id',(req,res)=>{
-//     console.log('rulesId' + req.query.rulesId);
-//     res.json(RulesController.getRule(req,res));
-//     });
-
-
 
 router.post('/api/books',(req,res)=>{
     res.json(BookController.createBook(req))
