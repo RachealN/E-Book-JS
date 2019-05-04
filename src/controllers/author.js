@@ -27,7 +27,7 @@ class AuthorController {
 			"success":"true"
 		}
 		}
-	static createAuthor(req,res){
+	static createAuthor(req,res){ 
 		const add = new Authors ({
 			authorId:authorArray.length + 1,
 			firstName:req.body.firstName,

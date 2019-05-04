@@ -50,7 +50,7 @@ class BookController {
 			status:req.body.status
 
 				});
-	// // Validation function
+	 // Validation function
 		// function validateBook(bookArray){
 		// 	const schema = {
 		// 		title:Joi.string().min(3).required(),
