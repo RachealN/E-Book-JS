@@ -9,10 +9,10 @@ chai.use(chaiHttp);
 
 
 
-describe(' get all books', () => {
-	it('should return all books', () => {
+describe(' get all authors', () => {
+	it('should return all authors', () => {
 	  chai.request(server)
-		.get('/api/v1/books')
+		.get('/api/v1/authors')
 		.end((err, res) => {
 		  chai.expect(res.body).to.be.a('object');
 		});
@@ -20,43 +20,44 @@ describe(' get all books', () => {
   });
 
 
-  describe(' create new book', () => {
-	it('new book should be created', () => {
+  describe(' create new author', () => {
+	it('new author should be created', () => {
 	  chai.request(server)
-		.post('/api/v1/books')
+		.post('/api/v1/authors')
 		.end((err, res) => {
 		  chai.expect(res.body).to.be.a('object');
 		});
 	});
   });
 
-  describe(' get one specific book', () => {
-	it('one book retrieved ', () => {
+  describe(' get one specific authors', () => {
+	it('one author retrieved ', () => {
 	  chai.request(server)
-		.get('/api/v1/books/:id')
+		.get('/api/v1/authors/:id')
 		.end((err, res) => {
 		  chai.expect(res.body).to.be.a('object');
 		});
 	});
   });
-  describe('if book not found', () => {
+  describe('if author not found', () => {
 	it('should return error', () => {
 	  chai.request(server)
-		.get('/api/v1/books/:id')
+		.get('/api/v1/authors/:id')
 		.end((err, res) => {
 		  chai.expect(res.statusCode).to.be.equal(200);
 		});
 	});
   });
-  describe('delete book', () => {
-	it('book will be deleted', () => {
+  describe('delete author', () => {
+	it('author will be deleted', () => {
 	  chai.request(server)
-		.delete('/api/v1/books/:id')
+		.delete('/api/v1/authors/:id')
 		.end((err, res) => {
 		  chai.expect(res.statusCode).to.be.equal(200);
 		});
 	});
   });
+  
   
   
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha || true",
+    "tests": "mocha src/tests/*.js ||true",
     "build": "babel server.js --out-dir build",
     "dev-start": "nodemon server.js",
     "lint": "eslint src/js"
