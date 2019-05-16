@@ -11,6 +11,11 @@ const BorrowingController = require('../controllers/borrow')
 const CategoryController = require('../controllers/category')
 const RulesController = require('../controllers/rules')
 
+const {bookvalidateBook} = require('../models/book')
+const auth = require('../middleware/auth')
+
+
+
 //Routes for Rules
 router.get('/api/rules',(req,res)=>{
     res.json(RulesController.getRules());
@@ -20,11 +25,6 @@ router.get('/api/rules/:id',(req,res)=>{
     res.json(RulesController.getRule(req));
 });
 
-
-// router.get('/api/rules/:id',(req,res)=>{
-//     console.log('rulesId' + req.query.id);
-//         res.json(RulesController.getRule(req,res));
-// });
 
 
 router.post('/api/rules',(req,res)=>{
@@ -164,7 +164,7 @@ router.get('/api/books/:id',(req,res)=>{
 });
 
 
-router.post('/api/books',(req,res)=>{
+router.post('/api/books',auth,(req,res)=>{
     res.json(BookController.createBook(req))
 });
 

@@ -39,16 +39,18 @@ describe(' get all authors', () => {
 		});
 	});
   });
-  describe('if author not found', () => {
+	
+	describe('if author not found', () => {
 	it('should return error', () => {
 	  chai.request(server)
 		.get('/api/v1/authors/:id')
 		.end((err, res) => {
-		  chai.expect(res.statusCode).to.be.equal(200);
+		  chai.expect(res.statusCode).to.be.equal(404);
 		});
 	});
   });
-  describe('delete author', () => {
+	
+	describe('delete author', () => {
 	it('author will be deleted', () => {
 	  chai.request(server)
 		.delete('/api/v1/authors/:id')
