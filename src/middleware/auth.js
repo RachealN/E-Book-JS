@@ -1,46 +1,43 @@
 const jwt = require('jsonwebtoken');
-const config = require('config');
-const express = require("express");
+const  UserController = require('../controllers/user')
 
-const app = express()
- 
-module.exports = function (req, res, next) {
- 
-    const token = req.header('x-auth-token');
-    if(req.body.username==="racheal"){
-
-        if(req.body.password===12345){
-             //if eveything is okay, create a token 
-
-        const payload = {
-
-            check:  true
-
-          };
-
-          const token = jwt.sign(payload, app.get('heymynameisracheal'), {
-                expiresIn: 1440 // expires in 24 hours
-
-          });
-
-
-          res.json({
-            message: 'authentication done ',
-            token: token
-            
-          });
+function verifyToken(req,res,next){
+    if(!req.headers.authorization){
+        return {
+            "status":403,
+            "message":"No authorization provided"
+        }
+        }
         
-        console.log(token);
-        }else{
-            res.json({message:"please check your password !"})
+    const token = req.headers.authorization.split(" ")[1]
+            if(!token)
+            return{
+                "status":403,
+                "message":"No token provided"
+            }
+
+            if (token){
+                jwt.verify(token,"heymaynameisracheal", (err, decoded) => {
+                    if(err) {
+                        return {
+                            "status":400,
+                            "message":"Failed to authenticate"
+                        };
+                    }else{
+                        req.user = decoded;
+                        next();
+
+                    }
+                })
+            }else{
+                return {
+                    "success":"false",
+                    "message":"Auth token is not supplied"
+                };
+            }
         }
 
-    }else{
-
-        res.json({message:"user not found !"})
-
-    }
-
-};
 
 
+
+module.exports = verifyToken

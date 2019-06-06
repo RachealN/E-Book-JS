@@ -8,7 +8,9 @@ const userArray= []
             userName,
             address,
             phoneNumber,
-            email
+            email,
+            password,
+            isAdmin
             
     
         }){
@@ -18,7 +20,9 @@ const userArray= []
             this.userName = userName;
             this.address = address;
             this.phoneNumber = phoneNumber,
-            this.email = email
+            this.email = email,
+            this.password = password,
+            this.isAdmin = isAdmin
 
         }
     

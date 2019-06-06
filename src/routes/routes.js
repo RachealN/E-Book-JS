@@ -10,9 +10,14 @@ const  UserController = require('../controllers/user')
 const BorrowingController = require('../controllers/borrow')
 const CategoryController = require('../controllers/category')
 const RulesController = require('../controllers/rules')
+const isAuthenticated = require('../middleware/auth')
 
 const {bookvalidateBook} = require('../models/book')
-const auth = require('../middleware/auth')
+const verifyToken = require('../middleware/auth')
+
+
+const {getBooks}  = verifyToken;
+
 
 
 
@@ -102,6 +107,17 @@ router.patch('/api/borrowers/:id',(req,res)=>{
 
 
 //Routes for users
+
+router.post('/api/auth/register',(req,res)=>{
+    res.json(UserController.signUp(req));
+});
+
+router.post('/api/auth/login',(req,res)=>{
+    res.json(UserController.login(req));
+});
+
+
+
 router.get('/api/users',(req,res)=>{
     res.json(UserController.getUsers(req));
 });
@@ -110,9 +126,9 @@ router.get('/api/users/:id',(req,res)=>{
     res.json(UserController.getUser(req));
 });
 
-router.post('/api/users',(req,res)=>{
-    res.json(UserController.createUser(req));
-});
+// router.post('/api/users',(req,res)=>{
+//     res.json(UserController.createUser(req));
+// });
 
 router.put('/api/users/:id',(req,res)=>{
     res.json(UserController.updateUser(req));
@@ -155,8 +171,8 @@ router.patch('/api/authors/:id',(req,res)=>{
 
 
 //Routes for Books
-router.get('/api/books',(req,res)=>{
-    res.json(BookController.getBooks())
+router.get('/api/books',verifyToken,(req,res)=>{
+    res.json(BookController.getBooks(req))
 });
 
 router.get('/api/books/:id',(req,res)=>{
@@ -164,9 +180,10 @@ router.get('/api/books/:id',(req,res)=>{
 });
 
 
-router.post('/api/books',auth,(req,res)=>{
+router.post('/api/books',(req,res)=>{
     res.json(BookController.createBook(req))
 });
+
 
 router.put('/api/books/:id',(req,res) =>{
     res.json(BookController.updateBook(req))
@@ -179,6 +196,12 @@ router.delete('/api/books/:id',(req,res) =>{
 router.patch('/api/books/:id',(req,res) =>{
     res.json(BookController.patchBook(req))
 });
+
+//register and login routes
+// router.post('/api/register',(req,res)=>{
+//     res.json(req)
+// });
+
 
 
 
