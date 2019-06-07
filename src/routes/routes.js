@@ -33,11 +33,11 @@ router.get('/api/rules/:id',(req,res)=>{
 
 
 router.post('/api/rules',(req,res)=>{
-    res.json(RulesController.createRules(req));
+    res.status(201).json(RulesController.createRules(req));
 });
 
 router.put('/api/rules/:id',(req,res)=>{
-    res.json(RulesController.updateRules(req));
+    res.status(201).json(RulesController.updateRules(req));
 });
 
 router.delete('/api/rules/:id',(req,res)=>{
@@ -60,11 +60,11 @@ router.get('/api/categories/:id',(req,res)=>{
 });
 
 router.post('/api/categories',(req,res)=>{
-    res.json(CategoryController.createCategory(req));
+    res.status(201).json(CategoryController.createCategory(req));
 });
 
 router.put('/api/categories/:id',(req,res)=>{
-    res.json(CategoryController.updateCategory(req));
+    res.status(201).json(CategoryController.updateCategory(req));
 });
 
 router.delete('/api/categories/:id',(req,res)=>{
@@ -88,11 +88,11 @@ router.get('/api/borrowers/:id',(req,res)=>{
 });
 
 router.post('/api/borrowers',(req,res)=>{
-    res.json(BorrowingController.createBorrower(req));
+    res.status(201).json(BorrowingController.createBorrower(req));
 });
 
 router.put('/api/borrowers/:id',(req,res)=>{
-    res.json(BorrowingController.updateBorrow(req));
+    res.status(201).json(BorrowingController.updateBorrow(req));
 });
 
 router.delete('/api/borrowers/:id',(req,res)=>{
@@ -109,7 +109,7 @@ router.patch('/api/borrowers/:id',(req,res)=>{
 //Routes for users
 
 router.post('/api/auth/register',(req,res)=>{
-    res.json(UserController.signUp(req));
+    res.status(201).json(UserController.signUp(req));
 });
 
 router.post('/api/auth/login',(req,res)=>{
@@ -126,12 +126,12 @@ router.get('/api/users/:id',(req,res)=>{
     res.json(UserController.getUser(req));
 });
 
-// router.post('/api/users',(req,res)=>{
-//     res.json(UserController.createUser(req));
-// });
+router.post('/api/users',(req,res)=>{
+    res.status(201).json(UserController.createUser(req));
+});
 
 router.put('/api/users/:id',(req,res)=>{
-    res.json(UserController.updateUser(req));
+    res.status(201).json(UserController.updateUser(req));
 });
 
 router.delete('/api/users/:id',(req,res)=>{
@@ -153,11 +153,11 @@ router.get('/api/authors/:id',(req,res)=>{
 });
 
 router.post('/api/authors',(req,res)=>{
-    res.json(AuthorController.createAuthor(req))
+    res.status(201).json(AuthorController.createAuthor(req))
 });
 
 router.put('/api/authors/:id',(req,res)=>{
-    res.json(AuthorController.updateAuthor(req))
+    res.status(201).json(AuthorController.updateAuthor(req))
 });
 
 router.delete('/api/authors/:id',(req,res)=>{
@@ -171,7 +171,7 @@ router.patch('/api/authors/:id',(req,res)=>{
 
 
 //Routes for Books
-router.get('/api/books',verifyToken,(req,res)=>{
+router.get('/api/books',(req,res)=>{
     res.json(BookController.getBooks(req))
 });
 
@@ -181,12 +181,12 @@ router.get('/api/books/:id',(req,res)=>{
 
 
 router.post('/api/books',(req,res)=>{
-    res.json(BookController.createBook(req))
+    res.status(201).json(BookController.createBook(req))
 });
 
 
 router.put('/api/books/:id',(req,res) =>{
-    res.json(BookController.updateBook(req))
+    res.status(201).json(BookController.updateBook(req))
 });
 
 router.delete('/api/books/:id',(req,res) =>{
@@ -196,11 +196,6 @@ router.delete('/api/books/:id',(req,res) =>{
 router.patch('/api/books/:id',(req,res) =>{
     res.json(BookController.patchBook(req))
 });
-
-//register and login routes
-// router.post('/api/register',(req,res)=>{
-//     res.json(req)
-// });
 
 
 

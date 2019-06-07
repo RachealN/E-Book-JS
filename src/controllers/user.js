@@ -47,7 +47,7 @@ class UserController {
 				
 		userArray.push(add);
 			return {
-				"status":200,
+				"status":201,
 				"success":"true",
 				"message":" successfully added",
 				add
@@ -138,7 +138,7 @@ class UserController {
 		if (user ){
 			const token = jwt.sign({user}, "heymaynameisracheal",{  expiresIn: 1440 });
 			return [{
-				"status":201,
+				"status":200,
 				"success":"true",
 				"message":" Authentication succesful",
 				user,token
@@ -153,6 +153,7 @@ class UserController {
 		}
 	}
 
+	
 	}
 
     
