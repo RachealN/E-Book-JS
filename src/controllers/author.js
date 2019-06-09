@@ -71,20 +71,24 @@ class AuthorController {
 	
 	static updateAuthor(req,res){
 		const newAuthor = authorArray.find(g => g.authorId === parseInt(req.params.id));
-		if (!authorArray) return{
-			"status":200,
-			"success":"true",
-			"message":" The author with the given ID was not found ",
-			newAuthor
+		if (newAuthor) {
+			(newAuthor.firstName = req.body.firstName),(newAuthor.lastName = req.body.lastName),(newAuthor.address = req.body.address)
+			(newAuthor.phoneNumber = req.body.phoneNumber)
 
-		};
+			return{
+				"status":200,
+				"success":"true",
+				"message":" successfully updated",
+				newAuthor
 
+			};
+		}
 		const authorArray = req.body.authorArray;
 		return{
-			"status":200,
-			"success":"true",
-			"message":" successfully updated",
-			newAuthor
+			"status":404,
+			"success":"false",
+			"message":"  The author with the given ID was not found "
+			
 
 		};
 

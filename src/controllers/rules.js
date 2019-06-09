@@ -82,20 +82,23 @@ class RulesController {
 	
 	static updateRules(req,res){
 		const newRule = rulesArray.find(g => g.rulesId === parseInt(req.params.rulesId));
-		if (!rulesArray) return{
-			"status":200,
-			"success":"true",
-			"message":" The Rule with the given ID was not found ",
-			get_id
+		if (newRule) {
+			(newRule.rule_description = req.body.rule_description),(rewRule.rule_value = req.body.rule_value)
 
-		};
+		
+			return{
+				"status":200,
+				"success":"true",
+				"message":"successfully updated  ",
+				newRule
 
-		const rulesArray = req.body.rulesArray;
+			};
+		}
 		return{
-			"status":200,
-			"success":"true",
-			"message":" successfully updated",
-			get_id
+			"status":404,
+			"success":"false",
+			"message":" The Rule with the given ID was not found"
+			
 
 		};
 

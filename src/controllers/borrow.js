@@ -96,20 +96,22 @@ class BorrowingController {
 	
 	static updateBorrow(req,res){
 		const newBorrower = borrowArray.find(g => g.borrowingId === parseInt(req.params.borrowingId));
-		if (!borrowingArray) return{
-			"status":200,
-			"success":"true",
-			"message":" The borrower with the given ID was not found ",
-			get_id
+		if (newBorrower) {
+			(newBorrower.date_issued = req.body.date_issued),(newBorrower.date_due_for_return = req.body.date_due_for_return),(newBorrower.date_returned = req.body.date_returned)
+			(newBorrower.amount_of_fine = req.body.amount_of_fine),(newBorrower.address = req.body.address),(newBorrower.phoneNumber = req.body.phoneNumber)
+			return{
+				"status":200,
+				"success":"true",
+				"message":"successfully updated ",
+				newBorrower
 
-		};
-
-		const borrowArray = req.body.borrowArray;
+			};
+		}
 		return{
-			"status":200,
-			"success":"true",
-			"message":" successfully updated",
-			get_id
+			"status":404,
+			"success":"false",
+			"message":" The borrower with the given ID was not found "
+			
 
 		};
 

@@ -171,7 +171,7 @@ router.patch('/api/authors/:id',(req,res)=>{
 
 
 //Routes for Books
-router.get('/api/books',(req,res)=>{
+router.get('/api/books',verifyToken,(req,res)=>{
     res.json(BookController.getBooks(req))
 });
 

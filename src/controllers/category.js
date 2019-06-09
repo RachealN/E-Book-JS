@@ -74,20 +74,21 @@ class CategoryController {
 	
 	static updateCategory(req,res){
 		const newCategory = categoryArray.find(g => g.categoryId === parseInt(req.params.categoryId));
-		if (!categoryArray) return{
-			"status":200,
-			"success":"true",
-			"message":" The category with the given ID was not found ",
-			get_id
+		if (newCategory) {
+			(newCategory.categoryName = req.body.categoryName)
+			return{
+				"status":200,
+				"success":"true",
+				"message":"successfully updated ",
+				newCategory
 
-		};
-
-		const categoryArray = req.body.categoryArray;
+			};
+		}
 		return{
-			"status":200,
-			"success":"true",
-			"message":" successfully updated",
-			get_id
+			"status":404,
+			"success":"false",
+			"message":" The category with the given ID was not found "
+			
 
 		};
 

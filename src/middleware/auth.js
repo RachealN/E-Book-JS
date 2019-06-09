@@ -10,21 +10,16 @@ function verifyToken(req,res,next){
         }
         
     const token = req.headers.authorization.split(" ")[1]
-            if(!token)
-            return{
-                "status":403,
-                "message":"No token provided"
-            }
 
             if (token){
-                jwt.verify(token,"heymaynameisracheal", (err, decoded) => {
+                jwt.verify(req.token,"heymaynameisracheal", (err, authUser) => {
                     if(err) {
                         return {
-                            "status":400,
+                            "status":403,
                             "message":"Failed to authenticate"
                         };
                     }else{
-                        req.user = decoded;
+                        req.user = authUser;
                         next();
 
                     }
@@ -32,7 +27,7 @@ function verifyToken(req,res,next){
             }else{
                 return {
                     "success":"false",
-                    "message":"Auth token is not supplied"
+                    "message":"Auth token is not provided"
                 };
             }
         }

@@ -6,6 +6,8 @@ const borrowArray = []
             date_issued,
             date_due_for_return,
             date_returned,
+            address,
+            phoneNumber,
             amount_of_fine
             
     

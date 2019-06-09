@@ -1,7 +1,9 @@
 
 const {Users,userArray} = require('../models/user')
+const Validations = require('../middleware/validators')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 
 
 
@@ -34,6 +36,15 @@ class UserController {
 		}
 		}
 	static createUser(req,res){
+
+		const {error} = Validations.postValidation(req.body);
+		if(error){
+			return {
+				"status":400,
+			  	"message":error.details[0].message  
+		  };
+			
+		}
 		const add = new Users ({
 			userId:userArray.length + 1,
 			firstName:req.body.firstName,
@@ -54,6 +65,10 @@ class UserController {
 				
 			};
 		}
+	
+	
+	
+	
 	static deleteUser(req,res){
 		const get_id = userArray.find(check_id => check_id.userId === parseInt(req.params.id));
 	if (!get_id) {
@@ -78,27 +93,79 @@ class UserController {
 	}
 	
 	static updateUser(req,res){
-		const newUser = userArray.find(g => g.userId === parseInt(req.params.userId));
-		if (!userArray) return{
+
+		const {error} = Validations.postValidation(req.body);
+		if(error){
+			return {
+				"status":400,
+			  	"message":error.details[0].message  
+		  };
+			
+		}
+		const newUser = userArray.find(check_id => check_id.userId===parseInt(req.params.id));
+		
+		if(newUser){
+			(newUser.firstName = req.body.firstName),(newUser.lastName = req.body.lastName),(newUser.email = req.body.email),(newUser.address = req.body.address)
+			(newUser.userName = req.body.userName),(newUser.phoneNumber = req.body.phoneNumber)
+
+			return{
 			"status":200,
 			"success":"true",
-			"message":" The user with the given ID was not found ",
-			get_id
+			"message":" successfully updated",newUser
 
-		};
+	   };
+	}
+	return {
+		"error":"user with that id is not found",
+		"status":"400",
+		"success":"false"
+	}
+	}
 
-		const userArray = req.body.userArray;
-		return{
+
+
+
+	static patchUser(req,res){
+
+		const {error} = Validations.postValidation(req.body);
+		if(error){
+			return {
+				"status":400,
+			  	"message":error.details[0].message  
+		  };
+			
+		}
+		const User = userArray.find(check_id => check_id.userId===parseInt(req.params.id));
+		
+		if(User){
+			(User.address = req.body.address)
+			return{
 			"status":200,
 			"success":"true",
-			"message":" successfully updated",
-			get_id
+			"message":" successfully updated",User
 
-		};
-
+	   };
+	}
+	return {
+		"error":"user with that id is not found",
+		"status":"400",
+		"success":"false"
+	}
+		
 
 	}
+
+
+	
 	static signUp(req,res){
+		const {error} = Validations.registerUserValidation(req.body);
+		if(error){
+			return {
+				"status":400,
+			  	"message":error.details[0].message  
+		  };
+			
+		}
 		const userResult = userArray.find(user => req.body.email === user.email);
 		if(userResult) return{
 			"status":400,
@@ -132,7 +199,19 @@ class UserController {
 		}
 
 	}
+
+
+
+
 	static login(req,res){
+		const {error} = Validations.loginUserValidation(req.body);
+		if(error){
+			return {
+				"status":400,
+			  	"message":error.details[0].message  
+		  };
+			
+		}
 		const  {email,password}  =  req.body;
 		const user = userArray.find(e =>(email === e.email && password === e.password ));
 		if (user ){

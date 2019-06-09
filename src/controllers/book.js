@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const {Books,bookArray} = require('../models/book')
-const {validateBook} = require('../middleware/validators')
+const Validations = require('../middleware/validators')
 
 class BookController {
 	static getBooks(req,res){
@@ -34,10 +34,19 @@ class BookController {
 		// const{error} = validateBook(req.body);
 		// if (error)  {
 		// 	return {
-		// 		"status":400,
+		// 	  	"status":400,
 		// 		"message":error.details[0].message  
 		// 	};
 		// }
+		const {error} = Validations.postValidation(req.body);
+		if(error){
+			return {
+				"status":400,
+			  	"message":error.details[0].message  
+		  };
+			
+		}
+
 		const add = new Books ({
 			bookId:bookArray.length + 1,
 			title:req.body.title,
@@ -50,7 +59,7 @@ class BookController {
 			status:req.body.status
 
 				});
-	 // Validation function
+	//  Validation function
 		// function validateBook(bookArray){
 		// 	const schema = {
 		// 		title:Joi.string().min(3).required(),
@@ -99,42 +108,54 @@ class BookController {
 	static updateBook(req,res){
 		const newBook = bookArray.find(check_id => check_id.bookId===parseInt(req.params.id));
 		
-		if(!newBook){
+		if(newBook){
+			(newBook.title = req.body.title),(newBook.isbn = req.body.isbn),(newBook.date_of_publication = req.body.date_of_publication)
+			(newBook.edition = req.body.edition),(newBook.price = req.body.price),(newBook.status = req.body.status)
+			
 			return{
-			"status":404,
-			"success":"false",
-			"message":" bookId not found",newBook
+			"status":200,
+			"success":"true",
+			"message":" successfully updated",newBook
 
 	   };
 	}
-
-	// const bookArray = req.body.bookArray;
-	newBook.bookArray = req.body.bookArray;
 	return {
-		newBook,
-		"message":"successfully updated",
-		"status":"200",
-		"success":"true"
+		"error":"BookId not found",
+		"status":"400",
+		"success":"false"
 	}
-	}
+		
+}
 	
 
-	// const bookArray = req.body.bookArray;
-	// 	return{
-	// 		"status":200,
-	// 		"success":"true",
-	// 		"message":" successfully updated",
-	// 		get_id
-
-	// 	};
-
-
-	// }
+	
 
 	static patchBook(req,res){
-		"Not implemented"
+		const Book = bookArray.find(check_id => check_id.bookId===parseInt(req.params.id));
+		
+		if(Book){
+			(Book.title = req.body.title)
+			return{
+			"status":200,
+			"success":"true",
+			"message":" successfully updated",Book
+
+	   };
 	}
+	return {
+		"error":"BookId not found",
+		"status":"400",
+		"success":"false"
+	}
+		
 }
+	
+
+	
+		
+
+	}
+
     
     
 module.exports = BookController
