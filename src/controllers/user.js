@@ -158,14 +158,14 @@ class UserController {
 
 	
 	static signUp(req,res){
-		const {error} = Validations.registerUserValidation(req.body);
-		if(error){
-			return {
-				"status":400,
-			  	"message":error.details[0].message  
-		  };
+		// const {error} = Validations.registerUserValidation(req.body);
+		// if(error){
+		// 	return {
+		// 		"status":400,
+		// 	  	"message":error.details[0].message  
+		//   };
 			
-		}
+		// }
 		const userResult = userArray.find(user => req.body.email === user.email);
 		if(userResult) return{
 			"status":400,
@@ -187,7 +187,7 @@ class UserController {
 					});
 					
 			userArray.push(newUser);
-			const token = jwt.sign({newUser:this.newUser,isAdmin:this.isAdmin}, "heymaynameisracheal",{  expiresIn: 1440 });
+			const token = jwt.sign({newUser}, "heymaynameisracheal",{  expiresIn: 1440 });
 			return [{
 				"status":201,
 				"success":"true",
@@ -204,14 +204,14 @@ class UserController {
 
 
 	static login(req,res){
-		const {error} = Validations.loginUserValidation(req.body);
-		if(error){
-			return {
-				"status":400,
-			  	"message":error.details[0].message  
-		  };
+		// const {error} = Validations.loginUserValidation(req.body);
+		// if(error){
+		// 	return {
+		// 		"status":400,
+		// 	  	"message":error.details[0].message  
+		//   };
 			
-		}
+		// }
 		const  {email,password}  =  req.body;
 		const user = userArray.find(e =>(email === e.email && password === e.password ));
 		if (user ){
@@ -220,8 +220,7 @@ class UserController {
 				"status":200,
 				"success":"true",
 				"message":" Authentication succesful",
-				user,token
-				
+				user
 			}];
 		}else{
 			return {

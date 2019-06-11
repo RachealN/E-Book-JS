@@ -13,10 +13,10 @@ const RulesController = require('../controllers/rules')
 const isAuthenticated = require('../middleware/auth')
 
 const {bookvalidateBook} = require('../models/book')
-const verifyToken = require('../middleware/auth')
+const Authorization = require('../middleware/auth')
 
 
-const {getBooks}  = verifyToken;
+const {getBooks}  = Authorization;
 
 
 
@@ -171,8 +171,8 @@ router.patch('/api/authors/:id',(req,res)=>{
 
 
 //Routes for Books
-router.get('/api/books',verifyToken,(req,res)=>{
-    res.json(BookController.getBooks(req))
+router.get('/api/books',Authorization.requireAdmin,(req,res)=>{
+    return res.json(BookController.getBooks(req))
 });
 
 router.get('/api/books/:id',(req,res)=>{

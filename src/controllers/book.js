@@ -38,14 +38,14 @@ class BookController {
 		// 		"message":error.details[0].message  
 		// 	};
 		// }
-		const {error} = Validations.postValidation(req.body);
-		if(error){
-			return {
-				"status":400,
-			  	"message":error.details[0].message  
-		  };
+		// const {error} = Validations.postValidation(req.body);
+		// if(error){
+		// 	return {
+		// 		"status":400,
+		// 	  	"message":error.details[0].message  
+		//   };
 			
-		}
+		// }
 
 		const add = new Books ({
 			bookId:bookArray.length + 1,
