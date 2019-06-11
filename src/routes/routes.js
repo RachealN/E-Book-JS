@@ -172,8 +172,9 @@ router.patch('/api/authors/:id',(req,res)=>{
 
 //Routes for Books
 router.get('/api/books',Authorization.requireAdmin,(req,res)=>{
-    return res.json(BookController.getBooks(req))
-});
+    if(req.user.isAdmin === 'true')
+        return res.json(BookController.getBooks(req))
+    });
 
 router.get('/api/books/:id',(req,res)=>{
     res.json(BookController.getBook(req))

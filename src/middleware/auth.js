@@ -37,26 +37,26 @@ class Authorization {
     
     
     static requireAdmin(req,res,next){
-        const User = userArray.find(e => e.userId===parseInt(req.params.email));
+        const User = userArray.find(e => e.email===parseInt(req.params.email));
             if(User){
                 return res.status(200).json({
                     "status":200,
                     "success":"true",
-                    "message":"Authorized to perform this function",User
+                    "message":"Authorized to perform this function",
                 })
             }
+            // if(User){
+            //     return res.status(401).json({
+            //         "status":401,
+            //         "success":"false",
+            //         "message":"You cannot perform this function"
+            //     })
+            // }
             if(!User){
                 return res.status(401).json({
                     "status":401,
                     "success":"false",
                     "message":"You cannot perform this function"
-                })
-            }
-            if(!User.admin){
-                return res.status(401).json({
-                    "status":401,
-                    "success":"false",
-                    "message":"user exists but is no admin user"
                 })
             }next();
 
