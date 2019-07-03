@@ -108,8 +108,11 @@ router.patch('/api/borrowers/:id',(req,res)=>{
 
 //Routes for users
 
-router.post('/api/auth/register',(req,res)=>{
-    res.status(201).json(UserController.signUp(req));
+router.post('/users',(req,res)=>{
+    return {
+        "status":201,
+        "message":"user created"
+    }
 });
 
 router.post('/api/auth/login',(req,res)=>{
